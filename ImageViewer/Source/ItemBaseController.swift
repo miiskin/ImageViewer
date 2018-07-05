@@ -17,7 +17,7 @@ open class ItemBaseController<T: UIView>: UIViewController, ItemController, UIGe
 
     //UI
     public var itemView = T()
-    let scrollView = UIScrollView()
+    open let scrollView = UIScrollView()
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
 
     //DELEGATE / DATASOURCE
@@ -251,12 +251,16 @@ open class ItemBaseController<T: UIView>: UIViewController, ItemController, UIGe
         itemView.center = contentCenter(forBoundingSize: scrollView.bounds.size, contentSize: scrollView.contentSize)
     }
 
+    open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+    }
+    
     func scrollViewDidSingleTap() {
 
         self.delegate?.itemControllerDidSingleTap(self)
     }
 
-    func scrollViewDidDoubleTap(_ recognizer: UITapGestureRecognizer) {
+    open func scrollViewDidDoubleTap(_ recognizer: UITapGestureRecognizer) {
 
         let touchPoint = recognizer.location(ofTouch: 0, in: itemView)
         let aspectFillScale = aspectFillZoomScale(forBoundingSize: scrollView.bounds.size, contentSize: itemView.bounds.size)
